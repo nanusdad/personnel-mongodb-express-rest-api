@@ -14,10 +14,17 @@ app.use(express.json());
 app.use(require("./routes/record"));
 
 // Global error handling
-app.use(function (err, _req, res) {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
-});
+
+app.use(function (err, req, res, next) {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+})
+
+// app.use(function (err, _req, res) {
+//   console.error(err.stack);
+
+//   res.status(500).send({ error: 'Something broke!'});
+// });
 
 // perform a database connection when the server starts
 dbo.connectToServer(function (err) {
